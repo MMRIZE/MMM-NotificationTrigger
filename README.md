@@ -19,32 +19,33 @@ git clone https://github.com/eouia/MMM-NotificationTrigger.git
   //This module works in Background, so you don't need to describe `position`.
   config: {
     triggers:[ // Array of triggers.
-			{
-				trigger: "INCOMINIG_NOTIFICATION", //REQUIRED
-				triggerSenderFilter: (sender) => { //OPTIONAL should return true or false
+      {
+        trigger: "INCOMINIG_NOTIFICATION", //REQUIRED
+        triggerSenderFilter: (sender) => { //OPTIONAL should return true or false
           if (sender == "....") {
             return true
           }
           return false
         },
-				triggerPayloadFilter: (payload) => { //OPTIONAL should return true or false
-					if (typeof payload.value !== 'undefined' && payload.value > 0) {
+        triggerPayloadFilter: (payload) => { //OPTIONAL should return true or false
+          if (typeof payload.value !== 'undefined' && payload.value > 0) {
             return true
           }
-					return false
-				},
-				fires: [ // Array of fires. You can enable multi-firing with one trigger.
-					{
-						fire:"OUTGOING_NOTIFICATION", //REQUIRED
-						payload: (payload) => { //OPTIONAL. transform received payload to what your target module wants.
-							return payload
-						},
-						delay: 1000, //OPTIONAL, if this is set, your outgoing notification will be fired after delay.
-					},
-				],
-			},
-		]
-},
+          return false
+        },
+        fires: [ // Array of fires. You can enable multi-firing with one trigger.
+          {
+            fire:"OUTGOING_NOTIFICATION", //REQUIRED
+            payload: (payload) => { //OPTIONAL. transform received payload to what your target module wants.
+              return payload
+            },
+            delay: 1000, //OPTIONAL, if this is set, your outgoing notification will be fired after delay.
+          },
+        ],
+      },
+    ]
+  },
+}
 
 ```
 
