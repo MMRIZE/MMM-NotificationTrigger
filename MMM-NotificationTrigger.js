@@ -34,16 +34,17 @@ Module.register("MMM-NotificationTrigger", {
 			if (notification == trigger.trigger) {
 				var senderFilter = (trigger.triggerSenderFilter)
 					? trigger.triggerSenderFilter
-					: this.config.defaults.triggers[0].triggerSenderFilter
+					: this.defaults.triggers[0].triggerSenderFilter
 				var payloadFilter = (trigger.triggerPayloadFilter)
 					? trigger.triggerPayloadFilter
-					: this.config.defaults.triggers[0].triggerPayloadFilter
+					: this.defaults.triggers[0].triggerPayloadFilter
 				if (senderFilter(sender) && payloadFilter(payload)) {
 					for(j in trigger.fires) {
 						var fire = trigger.fires[j]
 						var payloadResult = (fire.payload)
 							? fire.payload
-							: this.config.defaults.triggers[0].fires[0].payload
+							: this.defaults.triggers[0].fires[0].payload
+						console.log(trigger, fire)
 						if(fire.delay) {
 							setTimeout(()=>{
 								this.sendNotification(fire.fire, payloadResult(payload))
