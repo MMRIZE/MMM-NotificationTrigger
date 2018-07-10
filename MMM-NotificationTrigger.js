@@ -5,6 +5,7 @@
 
 Module.register("MMM-NotificationTrigger", {
 	defaults: {
+		useWebhook: false,
 		triggers:[
 			{
 				trigger: "SAMPLE_INCOMINIG_NOTIFICATION",
@@ -27,9 +28,20 @@ Module.register("MMM-NotificationTrigger", {
 		]
 	},
 
+	start: function() {
+		this.sendSocketNotification("INIT")
+	},
+
+	socketNotificationReceived: function(notification, payload) {
+		if (notification == "WEBHOOK" && this.config.useWebhook) {
+			this.notificationReceived(payload.notification, payload.payload, payload.sender)
+		}
+	},
+
 	notificationReceived: function (notification, payload, sender) {
 		var triggers = this.config.triggers
 		for(i in triggers) {
+
 			var trigger = triggers[i]
 			if (notification == trigger.trigger) {
 				var senderFilter = (trigger.triggerSenderFilter)
@@ -44,7 +56,6 @@ Module.register("MMM-NotificationTrigger", {
 						var payloadResult = (fire.payload)
 							? fire.payload
 							: this.defaults.triggers[0].fires[0].payload
-						console.log(trigger, fire)
 						if(fire.delay) {
 							setTimeout(()=>{
 								this.sendNotification(fire.fire, payloadResult(payload))
