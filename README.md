@@ -87,6 +87,7 @@ Sample for MMM-AssistantMk2 transcriptionHooking demo.
   }
 
 },
+```
 
 sample for MMM-Motion-Detection. This smaple just relay notification to ALERT module to display message, but you can modify for your purpose.
 ```javascript
