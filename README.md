@@ -1,5 +1,5 @@
 ## MMM-NotificationTrigger
-MMM-NotificationTrigger is a simple notification converter.
+MMM-NotificationTrigger is a simple notification converter from `TRIGGER_NOTIFICATION` to `FIRE_NOTIFICATION`
 Many MagicMirror modules have their own incoming and outgoing notification messages. But most of them are not compatible. This module can translate notifications among other modules.
 You can use this module to chain modules to work together.
 
@@ -18,6 +18,7 @@ git clone https://github.com/eouia/MMM-NotificationTrigger.git
   module: 'MMM-NotificationTrigger',
   //This module works in Background, so you don't need to describe `position`.
   config: {
+    useWebhook: false, // If you want to activate webhook as Notification emitter, set true. (eg. IFTTT)
     triggers:[ // Array of triggers.
       {
         trigger: "INCOMINIG_NOTIFICATION", //REQUIRED
@@ -86,4 +87,64 @@ Sample for MMM-AssistantMk2 transcriptionHooking demo.
   }
 
 },
+
+sample for MMM-Motion-Detection. This smaple just relay notification to ALERT module to display message, but you can modify for your purpose.
+```javascript
+{
+			module: "MMM-NotificationTrigger",
+			config: {
+				useWebhook:true, 
+				triggers:[
+					{
+						trigger: "motion-detected",
+						fires: [
+							{
+								fire:"SHOW_ALERT",
+								payload: function() {
+									return {
+										type:"notification",
+										title:"motion detector",
+										message: "motion detected"
+									}
+								},
+							}
+						]
+					},
+					{
+						trigger: "motion-stopped",
+						fires: [
+							{
+								fire:"SHOW_ALERT",
+								payload: function() {
+									return {
+										type:"notification",
+										title:"motion detector",
+										message: "motion stopped"
+									}
+								}
+							}
+						]
+					},
+				]
+			}
+		},
+```
+
+### useWebhook
+You can use this module as endpoint of webhook for IFTTT.
+Set your IFTTT recipe like this. (as `Make a web request` part)
+- URL: <your mirror static IP or domain>/webhook 
+- Method: post or get
+- Content-Type: anything or application/json
+- Body :
+```json
+{ 
+  "sender": {
+    "name":"..."
+  }, 
+  "notification": "...", 
+  "payload":{ 
+     ...
+  }
+ }
 ```
