@@ -133,7 +133,7 @@ sample for MMM-Motion-Detection. This smaple just relay notification to ALERT mo
 ### useWebhook
 You can use this module as endpoint of webhook for IFTTT.
 Set your IFTTT recipe like this. (as `Make a web request` part)
-- URL: <your mirror static IP or domain>/webhook 
+- URL: `your mirror static IP or domain`/webhook 
 - Method: post or get
 - Content-Type: anything or application/json
 - Body :
