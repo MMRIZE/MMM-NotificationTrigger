@@ -10,8 +10,6 @@ const bodyParser = require("body-parser");
 
 module.exports = NodeHelper.create({
 	start: function() {
-		console.log("I'm alive!!!")
-		this.sendSocketNotification("START!!", "blah blah")
 		this.expressApp.use(bodyParser.json())
 		this.expressApp.use(bodyParser.urlencoded({extended: true}))
 
