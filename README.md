@@ -149,3 +149,40 @@ Set your IFTTT recipe like this. (as `Make a web request` part)
   }
  }
 ```
+#### Configuration Example for IFTTT relaying to ALERT module.
+```javascript
+//in your configuration
+{
+      module: "MMM-NotificationTrigger",
+      config: {
+        useWebhook:true,
+        triggers:[
+          {
+            trigger: "IFTTT_COMMAND",
+            fires: [
+              {
+                fire:"SHOW_ALERT",
+                payload: function(payload) {
+                  return payload
+                },
+              },
+            ],
+          },
+	]
+      }
+ }
+```
+In your IFTTT Applet setting Body
+```json
+{ 
+  "sender": {
+    "name":"IFTTT"
+  }, 
+  "notification": "IFTTT_COMMAND", 
+  "payload":{ 
+     "title": "From IFTTT",
+     "message": "This message is comming from IFTTT",
+     "timer":5000
+  }
+ }
+```
