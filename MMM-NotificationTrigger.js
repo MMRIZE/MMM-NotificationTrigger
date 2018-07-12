@@ -41,7 +41,6 @@ Module.register("MMM-NotificationTrigger", {
 	notificationReceived: function (notification, payload, sender) {
 		var triggers = this.config.triggers
 		for(i in triggers) {
-
 			var trigger = triggers[i]
 			if (notification == trigger.trigger) {
 				var senderFilter = (trigger.triggerSenderFilter)
@@ -56,12 +55,13 @@ Module.register("MMM-NotificationTrigger", {
 						var payloadResult = (fire.payload)
 							? fire.payload
 							: this.defaults.triggers[0].fires[0].payload
+						var result = payloadResult(payload)
 						if(fire.delay) {
 							setTimeout(()=>{
-								this.sendNotification(fire.fire, payloadResult(payload))
+								this.sendNotification(fire.fire, result)
 							}, fire.delay)
 						} else {
-							this.sendNotification(fire.fire, payloadResult(payload))
+							this.sendNotification(fire.fire, result)
 						}
 					}
 				}
