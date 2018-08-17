@@ -92,43 +92,43 @@ Sample for MMM-AssistantMk2 transcriptionHooking demo.
 sample for MMM-Motion-Detection. This smaple just relay notification to ALERT module to display message, but you can modify for your purpose.
 ```javascript
 {
-			module: "MMM-NotificationTrigger",
-			config: {
-				useWebhook:true, 
-				triggers:[
-					{
-						trigger: "motion-detected",
-						fires: [
-							{
-								fire:"SHOW_ALERT",
-								payload: function() {
-									return {
-										type:"notification",
-										title:"motion detector",
-										message: "motion detected"
-									}
-								},
-							}
-						]
-					},
-					{
-						trigger: "motion-stopped",
-						fires: [
-							{
-								fire:"SHOW_ALERT",
-								payload: function() {
-									return {
-										type:"notification",
-										title:"motion detector",
-										message: "motion stopped"
-									}
-								}
-							}
-						]
-					},
-				]
-			}
-		},
+  module: "MMM-NotificationTrigger",
+  config: {
+    useWebhook:true, 
+    triggers:[
+      {
+        trigger: "motion-detected",
+        fires: [
+          {
+            fire:"SHOW_ALERT",
+            payload: function() {
+              return {
+                type:"notification",
+                title:"motion detector",
+                message: "motion detected"
+              }
+            },
+          }
+        ]
+      },
+      {
+        trigger: "motion-stopped",
+        fires: [
+          {
+            fire:"SHOW_ALERT",
+            payload: function() {
+              return {
+                type:"notification",
+                title:"motion detector",
+                message: "motion stopped"
+              }
+            }
+          }
+        ]
+      },
+    ]
+  }
+},
 ```
 
 ### useWebhook
