@@ -193,7 +193,7 @@ In your IFTTT Applet setting Body
  }
 ```
 
-### execExtScript Example
+### exec Example
 ```javascript
 {
   module: "MMM-NotificationTrigger",
