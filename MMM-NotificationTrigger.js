@@ -22,6 +22,7 @@ Module.register("MMM-NotificationTrigger", {
 							return payload
 						},
 						delay: 0,
+						exec: ""
 					},
 				],
 			},
@@ -35,6 +36,10 @@ Module.register("MMM-NotificationTrigger", {
 	socketNotificationReceived: function(notification, payload) {
 		if (notification == "WEBHOOK" && this.config.useWebhook) {
 			this.notificationReceived(payload.notification, payload.payload, payload.sender)
+		}
+		if (notification == "EXEC_RESULT") {
+			this.sendNotification(payload.fire + "_RESULT", payload)
+			console.log("[NOTTRG] Execution Result: ", payload)
 		}
 	},
 
@@ -59,9 +64,23 @@ Module.register("MMM-NotificationTrigger", {
 						if(fire.delay) {
 							setTimeout(()=>{
 								this.sendNotification(fire.fire, result)
+								if (fire.exec) {
+									this.sendSocketNotification("EXEC", {
+										trigger:trigger.trigger,
+										fire: fire.fire,
+										exec:fire.exec
+									})
+								}
 							}, fire.delay)
 						} else {
 							this.sendNotification(fire.fire, result)
+							if (fire.exec) {
+								this.sendSocketNotification("EXEC", {
+									trigger:trigger.trigger,
+									fire: fire.fire,
+									exec:fire.exec
+								})
+							}
 						}
 					}
 				}

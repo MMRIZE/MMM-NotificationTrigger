@@ -1,10 +1,15 @@
 ## MMM-NotificationTrigger
 MMM-NotificationTrigger is a simple notification relay which can convert notifications from `TRIGGER_NOTIFICATION` to `FIRE_NOTIFICATION`
 Many MagicMirror modules have their own incoming and outgoing notification messages. But most of them are not compatible. This module can translate notifications among other modules.
-You can use this module to chain modules to work together. 
+You can use this module to chain modules to work together.
 
 ### Screenshot
 This works in background, so there is no screenshot.
+
+### Updated
+**2018-10-02**
+- `exec` is added. Now you can execute your external shell command or script by notification.
+
 
 ### Installation
 
@@ -41,6 +46,7 @@ git clone https://github.com/eouia/MMM-NotificationTrigger.git
               return payload
             },
             delay: 1000, //OPTIONAL, if this is set, your outgoing notification will be fired after delay.
+            exec: "ls -l" //OPTIONAL, if exists, this script will be executed, and the result will be returned with "OUTGOING_NOTIFICATION_RESULT" and payload
           },
         ],
       },
@@ -94,7 +100,7 @@ sample for MMM-Motion-Detection. This smaple just relay notification to ALERT mo
 {
   module: "MMM-NotificationTrigger",
   config: {
-    useWebhook:true, 
+    useWebhook:true,
     triggers:[
       {
         trigger: "motion-detected",
@@ -134,17 +140,17 @@ sample for MMM-Motion-Detection. This smaple just relay notification to ALERT mo
 ### useWebhook
 You can use this module as endpoint of webhook for IFTTT.
 Set your IFTTT recipe like this. (as `Make a web request` part)
-- URL: `your mirror static IP or domain`/webhook 
+- URL: `your mirror static IP or domain`/webhook
 - Method: post or get
 - Content-Type: anything or application/json
 - Body :
 ```json
-{ 
+{
   "sender": {
     "name":"..."
-  }, 
-  "notification": "...", 
-  "payload":{ 
+  },
+  "notification": "...",
+  "payload":{
      ...
   }
  }
@@ -174,15 +180,36 @@ Set your IFTTT recipe like this. (as `Make a web request` part)
 ```
 In your IFTTT Applet setting Body
 ```json
-{ 
+{
   "sender": {
     "name":"IFTTT"
-  }, 
-  "notification": "IFTTT_COMMAND", 
-  "payload":{ 
+  },
+  "notification": "IFTTT_COMMAND",
+  "payload":{
      "title": "From IFTTT",
      "message": "This message is comming from IFTTT",
      "timer":5000
   }
  }
 ```
+
+### execExtScript Example
+```javascript
+{
+  module: "MMM-NotificationTrigger",
+  config: {
+    triggers:[
+      {
+        trigger: "DOM_OBJECTS_CREATED",
+        fires: [
+          {
+            fire:"MY_COMMAND",
+            exec: "sleep 5; ls -l"
+          },
+        ],
+      },
+    ]
+  }
+},
+```
+When `trigger` is emitted, `MY_COMMAND` notification will be fired. then, `MY_COMMAND_RESULT` notification will be fired with the payload which contains result of command. 
