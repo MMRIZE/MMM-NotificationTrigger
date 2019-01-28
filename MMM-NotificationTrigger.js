@@ -57,10 +57,12 @@ Module.register("MMM-NotificationTrigger", {
 				if (senderFilter(sender) && payloadFilter(payload)) {
 					for(j in trigger.fires) {
 						var fire = trigger.fires[j]
-						var payloadResult = (fire.payload)
-							? fire.payload
-							: this.defaults.triggers[0].fires[0].payload
-						var result = payloadResult(payload)
+						var result = payload
+						if (typeof fire.payload == "function") {
+							result = fire.payload(payload)
+						} else if (fire.payload) {
+							result = fire.payload
+						}
 						if(fire.delay) {
 							setTimeout(()=>{
 								this.sendNotification(fire.fire, result)
