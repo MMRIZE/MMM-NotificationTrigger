@@ -57,30 +57,35 @@ Module.register("MMM-NotificationTrigger", {
 				if (senderFilter(sender) && payloadFilter(payload)) {
 					for(j in trigger.fires) {
 						var fire = trigger.fires[j]
-						var result = payload
+						var payload_result = payload
 						if (typeof fire.payload == "function") {
-							result = fire.payload(payload)
+							payload_result = fire.payload(payload)
 						} else if (fire.payload) {
-							result = fire.payload
+							payload_result = fire.payload
 						}
+						var exec_result = fire.exec
+						if (exec_result && typeof exec_result == "function") {
+							exec_result = exec_result(payload)
+						}
+
 						if(fire.delay) {
 							setTimeout(()=>{
-								this.sendNotification(fire.fire, result)
-								if (fire.exec) {
+								this.sendNotification(fire.fire, payload_result)
+								if (exec_result) {
 									this.sendSocketNotification("EXEC", {
 										trigger:trigger.trigger,
 										fire: fire.fire,
-										exec:fire.exec
+										exec: exec_result
 									})
 								}
 							}, fire.delay)
 						} else {
-							this.sendNotification(fire.fire, result)
-							if (fire.exec) {
+							this.sendNotification(fire.fire, payload_result)
+							if (exec_result) {
 								this.sendSocketNotification("EXEC", {
 									trigger:trigger.trigger,
 									fire: fire.fire,
-									exec:fire.exec
+									exec: exec_result
 								})
 							}
 						}
