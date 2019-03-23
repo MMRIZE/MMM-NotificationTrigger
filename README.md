@@ -46,7 +46,7 @@ git clone https://github.com/eouia/MMM-NotificationTrigger.git
               return payload
             },
             delay: 1000, //OPTIONAL, if this is set, your outgoing notification will be fired after delay.
-            exec: "ls -l" //OPTIONAL, if exists, this script will be executed, and the result will be returned with "OUTGOING_NOTIFICATION_RESULT" and payload
+            exec: "ls -l" //OPTIONAL, if exists, this script will be executed, and the result will be returned with "OUTGOING_NOTIFICATION_RESULT" and payload.  Can also be specified as a function which accepts the payload as an argument and returns the command to execute.
           },
         ],
       },
