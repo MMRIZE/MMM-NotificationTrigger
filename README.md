@@ -213,3 +213,11 @@ In your IFTTT Applet setting Body
 },
 ```
 When `trigger` is emitted, `MY_COMMAND` notification will be fired. then, `MY_COMMAND_RESULT` notification will be fired with the payload which contains result of command. 
+
+Or you can also use function as `exec` like this;
+```js
+exec: (payload) => {
+  return "/somewhere/my/script.sh " + payload.option
+}
+```
+Thanks to @dgburr for making this PR.
