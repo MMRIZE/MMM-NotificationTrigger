@@ -69,16 +69,16 @@ Module.register("MMM-NotificationTrigger", {
 						}
 
 						if(fire.delay) {
-							setTimeout(()=>{
-								this.sendNotification(fire.fire, payload_result)
-								if (exec_result) {
+							setTimeout((fire, trigger, payload, exec) => {
+								this.sendNotification(fire, payload)
+								if (exec) {
 									this.sendSocketNotification("EXEC", {
-										trigger:trigger.trigger,
-										fire: fire.fire,
-										exec: exec_result
+										trigger:trigger,
+										fire: fire,
+										exec: exec
 									})
 								}
-							}, fire.delay)
+							}, fire.delay, fire.fire, trigger.trigger, payload_result, exec_result)
 						} else {
 							this.sendNotification(fire.fire, payload_result)
 							if (exec_result) {
