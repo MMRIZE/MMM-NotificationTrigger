@@ -67,10 +67,10 @@ Module.register("MMM-NotificationTrigger", {
 						if (exec_result && typeof exec_result == "function") {
 							exec_result = exec_result(payload)
 						}
-
 						if(fire.delay) {
 							setTimeout((fire, trigger, payload, exec) => {
 								this.sendNotification(fire, payload)
+								console.log(`[NOTTRG] ${fire.fire} is emitted.`)
 								if (exec) {
 									this.sendSocketNotification("EXEC", {
 										trigger:trigger,
@@ -81,6 +81,7 @@ Module.register("MMM-NotificationTrigger", {
 							}, fire.delay, fire.fire, trigger.trigger, payload_result, exec_result)
 						} else {
 							this.sendNotification(fire.fire, payload_result)
+							console.log(`[NOTTRG] ${fire.fire} is emitted.`)
 							if (exec_result) {
 								this.sendSocketNotification("EXEC", {
 									trigger:trigger.trigger,

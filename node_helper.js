@@ -20,8 +20,8 @@ module.exports = NodeHelper.create({
 			res.status(200).send({status: 200})
 		})
 		this.expressApp.get("/webhook", (req, res) => {
-			console.log("reqget?", req.body)
-			this.sendSocketNotification("WEBHOOK", req.body)
+			console.log("reqget?", req.query)
+			this.sendSocketNotification("WEBHOOK", req.query)
 			res.status(200).send({status: 200})
 		})
 	},

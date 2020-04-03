@@ -7,6 +7,9 @@ You can use this module to chain modules to work together.
 This works in background, so there is no screenshot.
 
 ### Updated
+**2020-04-03**
+- fixed : webhook GET method bug;
+
 **2018-10-02**
 - `exec` is added. Now you can execute your external shell command or script by notification.
 
@@ -212,7 +215,7 @@ In your IFTTT Applet setting Body
   }
 },
 ```
-When `trigger` is emitted, `MY_COMMAND` notification will be fired. then, `MY_COMMAND_RESULT` notification will be fired with the payload which contains result of command. 
+When `trigger` is emitted, `MY_COMMAND` notification will be fired. then, `MY_COMMAND_RESULT` notification will be fired with the payload which contains result of command.
 
 Or you can also use function as `exec` like this;
 ```js
