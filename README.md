@@ -224,3 +224,8 @@ exec: (payload) => {
 }
 ```
 Thanks to @dgburr for making this PR.
+
+## Author
+- Seongnoh Yi (eouia0819@gmail.com)
+
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Y8Y56IFLK)
