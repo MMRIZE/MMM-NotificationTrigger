@@ -1,4 +1,4 @@
-/* globals Module */
+/* globals Log Module */
 
 
 Module.register("MMM-NotificationTrigger", {
@@ -37,7 +37,7 @@ Module.register("MMM-NotificationTrigger", {
 		}
 		if (notification == "EXEC_RESULT") {
 			this.sendNotification(payload.fire + "_RESULT", payload)
-			console.log("[NOTTRG] Execution Result: ", payload)
+			Log.log("[NOTTRG] Execution Result: ", payload)
 		}
 	},
 
@@ -68,7 +68,7 @@ Module.register("MMM-NotificationTrigger", {
 						if(fire.delay) {
 							setTimeout((fire, trigger, payload, exec) => {
 								this.sendNotification(fire, payload)
-								console.log(`[NOTTRG] ${fire.fire} is emitted.`)
+								Log.log(`[NOTTRG] ${fire.fire} is emitted.`)
 								if (exec) {
 									this.sendSocketNotification("EXEC", {
 										trigger:trigger,
@@ -79,7 +79,7 @@ Module.register("MMM-NotificationTrigger", {
 							}, fire.delay, fire.fire, trigger.trigger, payload_result, exec_result)
 						} else {
 							this.sendNotification(fire.fire, payload_result)
-							console.log(`[NOTTRG] ${fire.fire} is emitted.`)
+							Log.log(`[NOTTRG] ${fire.fire} is emitted.`)
 							if (exec_result) {
 								this.sendSocketNotification("EXEC", {
 									trigger:trigger.trigger,

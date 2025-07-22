@@ -1,3 +1,4 @@
+const Log = require("logger");
 const NodeHelper = require("node_helper")
 const bodyParser = require("body-parser")
 const exec = require('node:child_process').exec
@@ -9,12 +10,12 @@ module.exports = NodeHelper.create({
 		this.expressApp.use(bodyParser.urlencoded({extended: true}))
 
 		this.expressApp.post("/webhook", (req, res) => {
-			console.log("reqpost?", req.body)
+			Log.log("[NOTTRG] reqpost?", req.body)
 			this.sendSocketNotification("WEBHOOK", req.body)
 			res.status(200).send({status: 200})
 		})
 		this.expressApp.get("/webhook", (req, res) => {
-			console.log("reqget?", req.query)
+			Log.log("[NOTTRG] reqget?", req.query)
 			this.sendSocketNotification("WEBHOOK", req.query)
 			res.status(200).send({status: 200})
 		})
@@ -31,11 +32,11 @@ module.exports = NodeHelper.create({
 					"stderr": stderr
 				})
 				if (error) {
-			    console.error(`[NOTTRG] exec error: ${error}`);
+			    Log.error(`[NOTTRG] exec error: ${error}`);
 			    return;
 			  }
-			  console.log(`[NOTTRG] stdout: ${stdout}`);
-			  console.log(`[NOTTRG] stderr: ${stderr}`);
+			  Log.log(`[NOTTRG] stdout: ${stdout}`);
+			  Log.log(`[NOTTRG] stderr: ${stderr}`);
 			})
 		}
 	}
