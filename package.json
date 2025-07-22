@@ -1,0 +1,23 @@
+{
+  "name": "mmm-notificationtrigger",
+  "version": "1.0.0",
+  "description": "A module for MagicMirror². It is a simple notification relay which can convert notifications from TRIGGER_NOTIFICATION to FIRE_NOTIFICATION.",
+  "main": "MMM-NotificationTrigger.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MMRIZE/MMM-NotificationTrigger.git"
+  },
+  "keywords": [
+    "Notification",
+    "Trigger"
+  ],
+  "author": "Seongnoh Sean Yi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MMRIZE/MMM-NotificationTrigger/issues"
+  },
+  "homepage": "https://github.com/MMRIZE/MMM-NotificationTrigger#readme"
+}
