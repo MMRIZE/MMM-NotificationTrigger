@@ -31,6 +31,15 @@ cd ~/MagicMirror/modules
 git clone https://github.com/MMRIZE/MMM-NotificationTrigger
 ```
 
+## Update
+
+To update this module, navigate to the module directory and pull the latest changes:
+
+```sh
+cd ~/MagicMirror/modules/MMM-NotificationTrigger
+git pull
+```
+
 ## Configuration
 
 ### Configuration Sample
