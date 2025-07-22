@@ -1,13 +1,16 @@
 # MMM-NotificationTrigger
 
-MMM-NotificationTrigger is a simple notification relay which can convert notifications from `TRIGGER_NOTIFICATION` to `FIRE_NOTIFICATION`.
+**MMM-NotificationTrigger** is a simple notification relay for [MagicMirror²](https://magicmirror.builders/) which can convert notifications from `TRIGGER_NOTIFICATION` to `FIRE_NOTIFICATION`.
 
-Many MagicMirror modules have their own incoming and outgoing notification messages. But most of them are not compatible. This module can translate notifications among other modules.
+<img src="symbolization.png" alt="symbolization" width="200">
+
+Many MagicMirror² modules have their own incoming and outgoing notification messages. But most of them are not compatible. This module can translate notifications among other modules.
+
 You can use this module to chain modules to work together.
 
 ## Screenshot
 
-This works in background, so there is no screenshot.
+This module works in background, so there is no screenshot.
 
 ## Updated
 
