@@ -16,8 +16,11 @@ This works in background, so there is no screenshot.
 
 ### Installation
 
+To install this module, clone the repository into your `~/MagicMirror/modules` directory:
+
 ```sh
-git clone https://github.com/eouia/MMM-NotificationTrigger.git
+cd ~/MagicMirror/modules
+git clone https://github.com/MMRIZE/MMM-NotificationTrigger
 ```
 
 ### Configuration Sample
