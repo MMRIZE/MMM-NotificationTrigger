@@ -1,12 +1,6 @@
-//
-// MMM-NotificationTrigger
-//
-
-"use strict"
-
 const NodeHelper = require("node_helper")
 const bodyParser = require("body-parser")
-const exec = require('child_process').exec
+const exec = require('node:child_process').exec
 
 
 module.exports = NodeHelper.create({

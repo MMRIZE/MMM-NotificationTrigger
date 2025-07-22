@@ -1,6 +1,4 @@
-//
-// Module : MMM-NotificationTrigger
-//
+/* globals Module */
 
 
 Module.register("MMM-NotificationTrigger", {
@@ -9,10 +7,10 @@ Module.register("MMM-NotificationTrigger", {
 		triggers:[
 			{
 				trigger: "SAMPLE_INCOMINIG_NOTIFICATION",
-				triggerSenderFilter: (sender) => {
+				triggerSenderFilter: () => {
 					return true
 				},
-				triggerPayloadFilter: (payload) => {
+				triggerPayloadFilter: () => {
 					return true
 				},
 				fires: [
@@ -45,7 +43,7 @@ Module.register("MMM-NotificationTrigger", {
 
 	notificationReceived: function (notification, payload, sender) {
 		var triggers = this.config.triggers
-		for(i in triggers) {
+		for(let i in triggers) {
 			var trigger = triggers[i]
 			if (notification == trigger.trigger) {
 				var senderFilter = (trigger.triggerSenderFilter)
@@ -55,7 +53,7 @@ Module.register("MMM-NotificationTrigger", {
 					? trigger.triggerPayloadFilter
 					: this.defaults.triggers[0].triggerPayloadFilter
 				if (senderFilter(sender) && payloadFilter(payload)) {
-					for(j in trigger.fires) {
+					for(let j in trigger.fires) {
 						var fire = trigger.fires[j]
 						var payload_result = payload
 						if (typeof fire.payload == "function") {
