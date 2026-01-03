@@ -4,6 +4,7 @@
   "description": "A module for MagicMirror². It is a simple notification relay which can convert notifications from TRIGGER_NOTIFICATION to FIRE_NOTIFICATION.",
   "main": "MMM-NotificationTrigger.js",
   "scripts": {
+    "demo": "cd ../../ && MM_CONFIG_FILE=modules/MMM-NotificationTrigger/demo.config.js node --run start:wayland:dev",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "test": "node --run lint"
