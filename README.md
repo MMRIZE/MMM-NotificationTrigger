@@ -12,16 +12,6 @@ You can use this module to chain modules to work together.
 
 This module works in background, so there is no screenshot.
 
-## Updated
-
-**2020-04-03**
-
-- fixed : webhook GET method bug;
-
-**2018-10-02**
-
-- `exec` is added. Now you can execute your external shell command or script by notification.
-
 ## Installation
 
 To install this module, clone the repository into your `~/MagicMirror/modules` directory and install the dependencies:
@@ -260,6 +250,10 @@ exec: (payload) => {
   return "/somewhere/my/script.sh " + payload.option;
 };
 ```
+
+## Changelog
+
+All notable changes to this project will be documented in the [CHANGELOG.md](./CHANGELOG.md) file.
 
 ## License
 
