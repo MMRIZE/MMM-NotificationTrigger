@@ -1,24 +1,17 @@
 /* globals Log Module */
 
-
 Module.register("MMM-NotificationTrigger", {
 	defaults: {
 		useWebhook: false,
-		triggers:[
+		triggers: [
 			{
 				trigger: "SAMPLE_INCOMING_NOTIFICATION",
-				triggerSenderFilter: () => {
-					return true
-				},
-				triggerPayloadFilter: () => {
-					return true
-				},
+				triggerSenderFilter: () => true,
+				triggerPayloadFilter: () => true,
 				fires: [
 					{
-						fire:"SAMPLE_OUTGOING_NOTIFICATION",
-						payload: (payload) => {
-							return payload
-						},
+						fire: "SAMPLE_OUTGOING_NOTIFICATION",
+						payload: payload => payload,
 						delay: 0,
 						exec: ""
 					},
@@ -27,64 +20,66 @@ Module.register("MMM-NotificationTrigger", {
 		]
 	},
 
-	start: function() {
+	start: function () {
 		this.sendSocketNotification("INIT")
 	},
 
-	socketNotificationReceived: function(notification, payload) {
-		if (notification == "WEBHOOK" && this.config.useWebhook) {
+	socketNotificationReceived: function (notification, payload) {
+		if (notification === "WEBHOOK" && this.config.useWebhook) {
 			this.notificationReceived(payload.notification, payload.payload, payload.sender)
 		}
-		if (notification == "EXEC_RESULT") {
-			this.sendNotification(payload.fire + "_RESULT", payload)
+		if (notification === "EXEC_RESULT") {
+			this.sendNotification(`${payload.fire}_RESULT`, payload)
 			Log.log("[NOTTRG] Execution Result: ", payload)
 		}
 	},
 
 	notificationReceived: function (notification, payload, sender) {
-		var triggers = this.config.triggers
-		for(let i in triggers) {
-			var trigger = triggers[i]
-			if (notification == trigger.trigger) {
-				var senderFilter = (trigger.triggerSenderFilter)
+		const { triggers } = this.config
+		for (const i in triggers) {
+			const trigger = triggers[i]
+			if (notification === trigger.trigger) {
+				const senderFilter = (trigger.triggerSenderFilter)
 					? trigger.triggerSenderFilter
 					: this.defaults.triggers[0].triggerSenderFilter
-				var payloadFilter = (trigger.triggerPayloadFilter)
+				const payloadFilter = (trigger.triggerPayloadFilter)
 					? trigger.triggerPayloadFilter
 					: this.defaults.triggers[0].triggerPayloadFilter
 				if (senderFilter(sender) && payloadFilter(payload)) {
-					for(let j in trigger.fires) {
-						var fire = trigger.fires[j]
-						var payload_result = payload
-						if (typeof fire.payload == "function") {
-							payload_result = fire.payload(payload)
-						} else if (fire.payload) {
-							payload_result = fire.payload
+					for (const j in trigger.fires) {
+						const fire = trigger.fires[j]
+						let payloadResult = payload
+						if (typeof fire.payload === "function") {
+							payloadResult = fire.payload(payload)
 						}
-						var exec_result = fire.exec
-						if (exec_result && typeof exec_result == "function") {
-							exec_result = exec_result(payload)
+						else if (fire.payload) {
+							payloadResult = fire.payload
 						}
-						if(fire.delay) {
+						let execResult = fire.exec
+						if (execResult && typeof execResult === "function") {
+							execResult = execResult(payload)
+						}
+						if (fire.delay) {
 							setTimeout((fire, trigger, payload, exec) => {
 								this.sendNotification(fire, payload)
 								Log.log(`[NOTTRG] ${fire.fire} is emitted.`)
 								if (exec) {
 									this.sendSocketNotification("EXEC", {
-										trigger:trigger,
+										trigger: trigger,
 										fire: fire,
 										exec: exec
 									})
 								}
-							}, fire.delay, fire.fire, trigger.trigger, payload_result, exec_result)
-						} else {
-							this.sendNotification(fire.fire, payload_result)
+							}, fire.delay, fire.fire, trigger.trigger, payloadResult, execResult)
+						}
+						else {
+							this.sendNotification(fire.fire, payloadResult)
 							Log.log(`[NOTTRG] ${fire.fire} is emitted.`)
-							if (exec_result) {
+							if (execResult) {
 								this.sendSocketNotification("EXEC", {
-									trigger:trigger.trigger,
+									trigger: trigger.trigger,
 									fire: fire.fire,
-									exec: exec_result
+									exec: execResult
 								})
 							}
 						}
