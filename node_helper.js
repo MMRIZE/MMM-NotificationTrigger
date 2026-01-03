@@ -23,6 +23,13 @@ module.exports = NodeHelper.create({
 	socketNotificationReceived: function (noti, payload) {
 		if (noti === "EXEC") {
 			exec(payload.exec, (error, stdout, stderr) => {
+				if (error) {
+					Log.error(`[NOTTRG] exec error: ${error}`)
+				}
+				else {
+					Log.log(`[NOTTRG] stdout: ${stdout}`)
+					Log.log(`[NOTTRG] stderr: ${stderr}`)
+				}
 				this.sendSocketNotification("EXEC_RESULT", {
 					trigger: payload.trigger,
 					fire: payload.fire,
@@ -30,12 +37,6 @@ module.exports = NodeHelper.create({
 					stdout: stdout,
 					stderr: stderr
 				})
-				if (error) {
-					Log.error(`[NOTTRG] exec error: ${error}`)
-					return
-				}
-				Log.log(`[NOTTRG] stdout: ${stdout}`)
-				Log.log(`[NOTTRG] stderr: ${stderr}`)
 			})
 		}
 	}
