@@ -6,7 +6,7 @@ Module.register("MMM-NotificationTrigger", {
 		useWebhook: false,
 		triggers:[
 			{
-				trigger: "SAMPLE_INCOMINIG_NOTIFICATION",
+				trigger: "SAMPLE_INCOMING_NOTIFICATION",
 				triggerSenderFilter: () => {
 					return true
 				},

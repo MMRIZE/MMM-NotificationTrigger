@@ -55,7 +55,7 @@ npm ci
         useWebhook: false, // If you want to activate webhook as Notification emitter, set true. (eg. IFTTT)
         triggers:[ // Array of triggers.
           {
-            trigger: "INCOMINIG_NOTIFICATION", //REQUIRED
+            trigger: "INCOMING_NOTIFICATION", //REQUIRED
             triggerSenderFilter: (sender) => { //OPTIONAL should return true or false
               if (sender == "....") {
                 return true
