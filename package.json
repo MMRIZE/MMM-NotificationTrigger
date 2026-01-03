@@ -1,6 +1,6 @@
 {
   "name": "mmm-notificationtrigger",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "A module for MagicMirror². It is a simple notification relay which can convert notifications from TRIGGER_NOTIFICATION to FIRE_NOTIFICATION.",
   "main": "MMM-NotificationTrigger.js",
   "scripts": {
