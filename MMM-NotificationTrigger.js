@@ -60,13 +60,13 @@ Module.register("MMM-NotificationTrigger", {
 							execResult = execResult(payload)
 						}
 						if (fire.delay) {
-							setTimeout((fire, trigger, payload, exec) => {
-								this.sendNotification(fire, payload)
-								Log.log(`[NOTTRG] ${fire.fire} is emitted.`)
+							setTimeout((fireName, triggerName, payload, exec) => {
+								this.sendNotification(fireName, payload)
+								Log.log(`[NOTTRG] ${fireName} is emitted.`)
 								if (exec) {
 									this.sendSocketNotification("EXEC", {
-										trigger: trigger,
-										fire: fire,
+										trigger: triggerName,
+										fire: fireName,
 										exec: exec
 									})
 								}
