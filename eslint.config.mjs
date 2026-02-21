@@ -14,8 +14,7 @@ export default defineConfig([
 				...globals.node,
 			},
 		},
-		plugins: { js, stylistic },
-		extends: ["js/all", "stylistic/recommended"],
+		extends: [js.configs.all, stylistic.configs.recommended],
 		rules: {
 			"@stylistic/array-element-newline": ["error", "consistent"],
 			"@stylistic/comma-dangle": ["error", "only-multiline"],
