@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.1.1](https://github.com/MMRIZE/MMM-NotificationTrigger/compare/v1.1.0...v1.1.1) (2026-02-21)
+
+
+### Fixed
+
+* use static payloads in demo config ([f2a8ca2](https://github.com/MMRIZE/MMM-NotificationTrigger/commit/f2a8ca22a2a129d0d2f30b24443e86daa856aefc))
+
+
+### Documentation
+
+* replace deprecated AssistantMk2 example and add function behavior note ([14419bb](https://github.com/MMRIZE/MMM-NotificationTrigger/commit/14419bb11c68ecf253b68cbe1132cd688f9e3bf6))
+
+
+### Chores
+
+* add lint-staged and simple-git-hooks for pre-commit linting ([5d60ce4](https://github.com/MMRIZE/MMM-NotificationTrigger/commit/5d60ce42bf7a56b2b76ba73b1d251e714fd54a52))
+* simplify demo script command ([bd41b00](https://github.com/MMRIZE/MMM-NotificationTrigger/commit/bd41b00f8a71b5ae2b3a4c585a44a59f075e4275))
+* update dependencies ([720423c](https://github.com/MMRIZE/MMM-NotificationTrigger/commit/720423c5c53c8a0ac394de599c08b6bc3199a887))
+* update eslint config ([0982a19](https://github.com/MMRIZE/MMM-NotificationTrigger/commit/0982a191a17bb8727bbc81a8a32b0417d32a7f8a))
+
+
+### Code Refactoring
+
+* replace body-parser with express.json() and express.urlencoded() for request parsing ([b9b7eb1](https://github.com/MMRIZE/MMM-NotificationTrigger/commit/b9b7eb100848d26a02b7fb5d45b9c078fe78c52d))
+
 ## [1.1.0](https://github.com/MMRIZE/MMM-NotificationTrigger/compare/v1.0.1...v1.1.0) (2026-01-03)
 
 ### Added
