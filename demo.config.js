@@ -39,22 +39,22 @@ const config = {
 						fires: [
 							{
 								fire: "MODULE_TOGGLE",
-								payload: payload => ({ module: "calendar", force: payload })
+								payload: { module: "calendar" }
 							}
 						]
 					},
 					{
-						// Example 2: Show alert when calendar event is triggered
+						// Example 2: Show alert when calendar events are loaded
 						trigger: "CALENDAR_EVENTS",
 						triggerPayloadFilter: payload => Array.isArray(payload) && payload.length > 0,
 						fires: [
 							{
 								fire: "SHOW_ALERT",
-								payload: payload => ({
+								payload: {
 									type: "notification",
-									title: "Upcoming Event",
-									message: `You have ${payload.length} event(s) today`
-								}),
+									title: "Calendar Loaded",
+									message: "Holiday calendar events are ready"
+								},
 								delay: 1000
 							}
 						]
@@ -66,7 +66,7 @@ const config = {
 						fires: [
 							{
 								fire: "SYSTEM_INFO",
-								payload: payload => ({ source: "button", data: payload }),
+								payload: { source: "button" },
 								exec: "date"
 							}
 						]
