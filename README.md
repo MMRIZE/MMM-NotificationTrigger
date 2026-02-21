@@ -14,23 +14,20 @@ This module works in background, so there is no screenshot.
 
 ## Installation
 
-To install this module, clone the repository into your `~/MagicMirror/modules` directory and install the dependencies:
+To install this module, clone the repository into your `~/MagicMirror/modules` directory:
 
 ```sh
 cd ~/MagicMirror/modules
 git clone https://github.com/MMRIZE/MMM-NotificationTrigger
-cd MMM-NotificationTrigger
-npm ci
 ```
 
 ## Update
 
-To update this module, navigate to the module directory, pull the latest changes and install the dependencies:
+To update this module, navigate to the module directory and pull the latest changes:
 
 ```sh
 cd ~/MagicMirror/modules/MMM-NotificationTrigger
 git pull
-npm ci
 ```
 
 ## Configuration
