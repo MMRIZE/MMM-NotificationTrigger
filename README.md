@@ -65,7 +65,7 @@ npm ci
                   return payload
                 },
                 delay: 1000, //OPTIONAL, if this is set, your outgoing notification will be fired after delay.
-                exec: "ls -l" //OPTIONAL, if exists, this script will be executed, and the result will be returned with "OUTGOING_NOTIFICATION_RESULT" and payload.  Can also be specified as a function which accepts the payload as an argument and returns the command to execute.
+                exec: "ls -l" //OPTIONAL, if exists, this script will be executed, and the result will be returned with "OUTGOING_NOTIFICATION_RESULT" and payload. Can also be a function: (payload) => "command " + payload.option
               },
             ],
           },
@@ -75,7 +75,7 @@ npm ci
 
 ```
 
-Sample for MMM-AssistantMk2 transcriptionHooking demo.
+Sample for relaying a notification to the alert module with payload transformation.
 
 ```javascript
     {
@@ -83,18 +83,9 @@ Sample for MMM-AssistantMk2 transcriptionHooking demo.
       config: {
         triggers:[
           {
-            trigger: "ASSISTANT_ACTION",
-            triggerSenderFilter: (sender) => {
-              console.log(sender)
-              if (sender.name == 'MMM-AssistantMk2') {
-                return true
-              } else {
-                return false
-              }
-            },
+            trigger: "CALENDAR_EVENTS",
             triggerPayloadFilter: (payload) => {
-              console.log(payload)
-              return true
+              return Array.isArray(payload) && payload.length > 0
             },
             fires: [
               {
@@ -102,8 +93,8 @@ Sample for MMM-AssistantMk2 transcriptionHooking demo.
                 payload: (payload) => {
                   return {
                     type: "notification",
-                    title: payload.type,
-                    message: payload.command
+                    title: "Calendar",
+                    message: `You have ${payload.length} upcoming event(s)`
                   }
                 },
               },
@@ -127,12 +118,10 @@ sample for MMM-Motion-Detection. This smaple just relay notification to ALERT mo
             fires: [
               {
                 fire:"SHOW_ALERT",
-                payload: function() {
-                  return {
-                    type:"notification",
-                    title:"motion detector",
-                    message: "motion detected"
-                  }
+                payload: {
+                  type:"notification",
+                  title:"motion detector",
+                  message: "motion detected"
                 },
               }
             ]
@@ -142,12 +131,10 @@ sample for MMM-Motion-Detection. This smaple just relay notification to ALERT mo
             fires: [
               {
                 fire:"SHOW_ALERT",
-                payload: function() {
-                  return {
-                    type:"notification",
-                    title:"motion detector",
-                    message: "motion stopped"
-                  }
+                payload: {
+                  type:"notification",
+                  title:"motion detector",
+                  message: "motion stopped"
                 }
               }
             ]
@@ -243,17 +230,19 @@ In your IFTTT Applet setting Body
 
 When `trigger` is emitted, `MY_COMMAND` notification will be fired. then, `MY_COMMAND_RESULT` notification will be fired with the payload which contains result of command.
 
-Or you can also use function as `exec` like this;
+You can also use a function as `exec` like this:
 
 ```js
 exec: (payload) => {
   return "/somewhere/my/script.sh " + payload.option;
-};
+}
 ```
+
+> **Note:** The `payload`, `exec`, `triggerSenderFilter` and `triggerPayloadFilter` properties support functions. These functions are evaluated in the browser context and work when MagicMirror loads the config as a JavaScript file (the default). If your config is loaded through a different mechanism that serializes it to JSON, functions will be lost.
 
 ## Changelog
 
-All notable changes to this project will be documented in the [CHANGELOG.md](./CHANGELOG.md) file.
+All notable changes to this project will be documented in the [CHANGELOG.md](CHANGELOG.md) file.
 
 ## License
 
