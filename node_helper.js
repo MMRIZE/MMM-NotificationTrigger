@@ -1,12 +1,12 @@
 const Log = require("logger")
 const NodeHelper = require("node_helper")
-const bodyParser = require("body-parser")
+const express = require("express")
 const { exec } = require("node:child_process")
 
 module.exports = NodeHelper.create({
 	start: function () {
-		this.expressApp.use(bodyParser.json())
-		this.expressApp.use(bodyParser.urlencoded({ extended: true }))
+		this.expressApp.use(express.json())
+		this.expressApp.use(express.urlencoded({ extended: true }))
 
 		this.expressApp.post("/webhook", (req, res) => {
 			Log.log("[NOTTRG] reqpost?", req.body)
