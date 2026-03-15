@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.1.2](https://github.com/MMRIZE/MMM-NotificationTrigger/compare/v1.1.1...v1.1.2) (2026-03-15)
+
+
+### Fixed
+
+* handle falsy fire payload values (0, false, "") correctly ([81f6ec7](https://github.com/MMRIZE/MMM-NotificationTrigger/commit/81f6ec7b415fa8c8f3bf27c4f35832f6a707c481))
+
+
+### Documentation
+
+* simplify installation and update instructions since there are no dependencies to install ([6e62ed8](https://github.com/MMRIZE/MMM-NotificationTrigger/commit/6e62ed861498a0a06e781597a2cfb543c7717a42))
+
+
+### Chores
+
+* update devDependencies ([d7e0932](https://github.com/MMRIZE/MMM-NotificationTrigger/commit/d7e09323234c66741418b52d49ff1f4edd792d35))
+
+
+### Tests
+
+* introduce node:test test suite and add baseline happy-path coverage ([a844458](https://github.com/MMRIZE/MMM-NotificationTrigger/commit/a84445882641a9db45c9e1641d8e573867d28d71))
+
 ## [1.1.1](https://github.com/MMRIZE/MMM-NotificationTrigger/compare/v1.1.0...v1.1.1) (2026-02-21)
 
 
