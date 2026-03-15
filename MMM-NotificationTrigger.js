@@ -52,7 +52,7 @@ Module.register("MMM-NotificationTrigger", {
 						if (typeof fire.payload === "function") {
 							payloadResult = fire.payload(payload)
 						}
-						else if (fire.payload) {
+						else if (Object.hasOwn(fire, "payload")) {
 							payloadResult = fire.payload
 						}
 						let execResult = fire.exec
